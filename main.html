@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>User login/logout</title>
+	</head>
+	<body>
+		<center>
+			<h1>Hackable InstaGrame</h1>
+		{% if user %}
+		{{ welcome }} {{ myuser.name }} welcome to the application<br/>
+		<p align="right"><a href='/adpost'><input type="button" Name="login" value="add post"></a></p>
+		{%for p in post%}
+		<!-- {{p}} -->
+		<div>
+		<a href="/"><img src={{p}} style="height:300px;width: 300px"></a><br/>
+		{{cap[loop.index-1]}}
+	</div>
+		{%endfor%}<br/>
+		<br/>
+
+
+		{% else %}
+		<p>Hello guest welcome to the application</p>
+		{% endif %}
+		<p align="right"><a href='{{ url }}'><input type="button" Name="login" value="{{ url_string }} "></a></p>
+	</center>
+	</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Add Post</h1>
+    <fieldset>
+      <form action="{{upload_url}}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" value=""><br/>
+        <input type="text" maxlength="200" name="P_Caption" value="{{mypost.cap}}"><br/>
+        <input type="Submit" name="Button" value="Add">
+      </form>
+    </fieldset>
+  </body>
+</html>
