@@ -15,7 +15,7 @@ class PostDb(ndb.Model):
 	postby = ndb.KeyProperty(kind='MyUser')
 	cap = ndb.StringProperty()
 	time = ndb.DateTimeProperty()
-	comment = ndb.KeyProperty(kind='Comment', repeated=False)
+	comment = ndb.KeyProperty(kind='Comment', repeated=True)
 	like = ndb.KeyProperty(kind='MyUser', repeated = True)
 
 class Comment(ndb.Model):

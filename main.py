@@ -38,6 +38,8 @@ class MainPage(webapp2.RequestHandler):
 				myuser = MyUser(id=user.user_id())
 				myuser.email_address = user.email()
 				myuser.put()
+			if myuser.name == None:
+				self.redirect('/edit')
 		if myuser:
 			for post in allpost:
 				if myuser.follows:

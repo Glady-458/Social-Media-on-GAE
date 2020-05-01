@@ -59,11 +59,10 @@ class PhotoUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 				myuser.follows = []
 				myuser.followers = []
 				myuser.put()
-
-				# self.redirect('/show/%s' % upload.key())
-
-			elif self.request.get('button') == 'Cancel':
 				self.redirect('/')
+
+		elif self.request.get('button') == 'Cancel':
+			self.redirect('/')
 class show(blobstore_handlers.BlobstoreDownloadHandler):
 	def get(self, pic_key):
 		if not blobstore.get(pic_key):

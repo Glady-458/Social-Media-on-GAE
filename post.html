@@ -5,7 +5,17 @@
     <title></title>
   </head>
   <body>
-fghjknjkm,l
-<img src={{mimg}} style="height:300px;width: 300px">
+    <fieldset>
+    <center>
+      <h1> Add Comments</h1>
+      <img src={{mimg}} style="height:300px;width: 300px">
+      <form action="/post?id={{key}}" method="post">
+        <input type="text" name="id2" value="{{key}}">
+        Comment: <br/><textarea maxlength="200" rows="8" cols="40"name="Comments"/></textarea>
+        <br/><input type="submit" name = "button" value="Submit"/>
+
+      </form>
+    </center>
+    </fieldset>
   </body>
 </html>

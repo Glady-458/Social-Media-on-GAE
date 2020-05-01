@@ -19,12 +19,16 @@
 	</div>
 		{%endfor%}<br/>
 		<br/> -->
-		second loop<br/>
+		<br/>
 		{%set c=0%}
 		{%for p in pic if c < 50 %}
 		<div>
 			<a href="/post?id={{p.key.id()}}"><img src={{rcpic[loop.index-1]}} style="height:300px;width: 300px"></a><br/>
-			{{p.cap}}  --> {{p.time}}  --> {{p.key.id()}} -->{{p.pst}}
+			{{p.cap}}<br/>
+			{%if p.comment%}Comments: <br/>{%endif%}
+			{%for ck in p.comment%}
+			{{ck.get().user.get().name}}-->{{ck.get().comment}}<br/>
+			{%endfor%}
 		<br/>
 		</div>
 		{%set c=c+1%}
