@@ -21,7 +21,7 @@ class AdPost(blobstore_handlers.BlobstoreUploadHandler):
 			myuser_key = ndb.Key('MyUser', user.user_id())
 			myuser = myuser_key.get()
 			mypost = None
-			post_key = ndb.Key('Post', user.user_id())
+			post_key = ndb.Key('PostDb', user.user_id())
 			mypost = post_key.get()
 			upload_url = blobstore.create_upload_url('/adpost')
 			key = BlobKey(str(myuser.DP))

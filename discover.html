@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <fieldset>
+      <form action="/search" method="post">
+        <input type="text" name="name"><br/>
+        <input type="Submit" name="button" value="Search"/><br/>
+        <!-- {{list}}<br/> -->
+
+        <table>
+          {%for name in list%}
+          {%if name.name != myuser.name%}
+            <tr>
+              <td><a href="/User?id={{name.key.id()}}">{{name.name}}</a></td>
+            </tr>
+          {%endif%}
+          {%endfor%}
+        </table>
+
+
+      </form>
+    </fieldset>
+  </body>
+</html>

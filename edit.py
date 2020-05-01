@@ -56,6 +56,8 @@ class PhotoUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 				myuser.age = int(self.request.get('users_age'))
 				upload_url = blobstore.create_upload_url('file')
 				myuser.DP = upload.key()
+				myuser.follows = []
+				myuser.followers = []
 				myuser.put()
 
 				# self.redirect('/show/%s' % upload.key())

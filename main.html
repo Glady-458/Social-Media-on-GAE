@@ -8,9 +8,9 @@
 			<h1>Hackable InstaGrame</h1>
 		{% if user %}
 		{{ welcome }} {{ myuser.name }} welcome to the application<br/>
-		<p align="right"><a href='/adpost'><input type="button" Name="login" value="add post"></a></p>
+		<p align="right"><a href='/adpost'><input type="button" Name="adp" value="add post"></a></p>
+		<a href='/follow'><a href='/search'><input type="button" Name="search" value="search"></a>
 		{%for p in post%}
-		<!-- {{p}} -->
 		<div>
 		<a href="/"><img src={{p}} style="height:300px;width: 300px"></a><br/>
 		{{cap[loop.index-1]}}

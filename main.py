@@ -1,12 +1,15 @@
 #! python2
 import webapp2
 import jinja2
+from search import *
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import os
 from datastore import *
 from edit import *
 from addpost import *
+from userinfo import *
+from follow import *
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -66,5 +69,9 @@ app = webapp2.WSGIApplication([
 ('/edit', Edit),
 ('/upload_photo', PhotoUploadHandler),
 ('/show/([^/]+)?',show),
-('/adpost',AdPost)
+('/search', Search),
+('/adpost',AdPost),
+('/User',User),
+('/follower', Follower),
+('/following', Following)
 ], debug=True)
