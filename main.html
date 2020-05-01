@@ -10,15 +10,25 @@
 		{{ welcome }} {{ myuser.name }} welcome to the application<br/>
 		<p align="right"><a href='/adpost'><input type="button" Name="adp" value="add post"></a></p>
 		<a href='/follow'><a href='/search'><input type="button" Name="search" value="search"></a>
-		{%for p in post%}
+		<!-- <br>{{allpost}}<br> -->
+		<!-- <br>{{myuser.post}}<br>
+		{%for p in allpost%}
 		<div>
-		<a href="/"><img src={{p}} style="height:300px;width: 300px"></a><br/>
-		{{cap[loop.index-1]}}
+			{{p.cap}}  {{p.postby.get().name}}  {{p.time}}   {{p.key.id()}}
+		<br/>
 	</div>
 		{%endfor%}<br/>
+		<br/> -->
+		second loop<br/>
+		{%set c=0%}
+		{%for p in pic if c < 50 %}
+		<div>
+			<a href="/post?id={{p.key.id()}}"><img src={{rcpic[loop.index-1]}} style="height:300px;width: 300px"></a><br/>
+			{{p.cap}}  --> {{p.time}}  --> {{p.key.id()}} -->{{p.pst}}
 		<br/>
-
-
+		</div>
+		{%set c=c+1%}
+		{%endfor%}
 		{% else %}
 		<p>Hello guest welcome to the application</p>
 		{% endif %}

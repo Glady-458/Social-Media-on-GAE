@@ -10,6 +10,8 @@ from edit import *
 from addpost import *
 from userinfo import *
 from follow import *
+from post import *
+from datetime import datetime
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -23,10 +25,9 @@ class MainPage(webapp2.RequestHandler):
 		welcome = 'Welcome back'
 		myuser = None
 		user = users.get_current_user()
-		keys=[]
-		post = []
-		cap = []
-
+		pic = []
+		rcpic = []
+		allpost = PostDb().query().order(-PostDb.time).fetch()
 		if user:
 			url = users.create_logout_url(self.request.uri)
 			url_string = 'logout'
@@ -37,16 +38,18 @@ class MainPage(webapp2.RequestHandler):
 				myuser = MyUser(id=user.user_id())
 				myuser.email_address = user.email()
 				myuser.put()
-
-			if myuser.name==None:
-				self.redirect('/edit')
-			if myuser:
-				for key in reversed(myuser.post):
-					ndbk = key.get()
-					cap.append(ndbk.cap)
-					keys.append(ndbk.pst)
-				for key in keys:
-					post.append(get_serving_url(key))
+		if myuser:
+			for post in allpost:
+				if myuser.follows:
+					for fp in myuser.follows:
+						if (post.key in fp.get().post) or (post.key in myuser.post) :
+							if(post not in pic):#allpost.remove(post)
+								pic.append(post)
+				else:
+					if post.key in myuser.post:
+						pic.append(post)
+			for key in pic:
+				rcpic.append(get_serving_url(key.pst))
 
 		else:
 			url = users.create_login_url(self.request.uri)
@@ -57,9 +60,9 @@ class MainPage(webapp2.RequestHandler):
 			'user' : user,
 			'welcome' : welcome,
 			'myuser' : myuser,
-			'key' : keys,
-			'post' : post,
-			'cap' : cap
+			'allpost' : allpost,
+			'pic' : pic,
+			'rcpic' : rcpic
 		}
 		template = JINJA_ENVIRONMENT.get_template('main.html')
 		self.response.write(template.render(template_values))
@@ -73,5 +76,6 @@ app = webapp2.WSGIApplication([
 ('/adpost',AdPost),
 ('/User',User),
 ('/follower', Follower),
-('/following', Following)
+('/following', Following),
+('/post', Post)
 ], debug=True)
