@@ -50,16 +50,19 @@ class AdPost(blobstore_handlers.BlobstoreUploadHandler):
 		myuser_key = ndb.Key('MyUser', user.user_id())
 		myuser = myuser_key.get()
 		if user:
-			upload = self.get_uploads('file')[0]
-			# upload_url = blobstore.create_upload_url('/AdPost')
-			mypost = PostDb()
-			# upload_url = blobstore.create_upload_url('file')
-			# mypost = post_key.get()
-			mypost.pst=upload.key()
-			mypost.cap=self.request.get('P_Caption')
-			mypost.time=datetime.now()
-			mypost.postby=ndb.Key('MyUser',myuser.key.id())
-			mypost.put()
-			myuser.post.append(ndb.Key('PostDb',mypost.key.id()))
-			myuser.put()
-			self.redirect('/')
+			if self.request.get('Button') == "Add":
+				upload = self.get_uploads('file')[0]
+				# upload_url = blobstore.create_upload_url('/AdPost')
+				mypost = PostDb()
+				# upload_url = blobstore.create_upload_url('file')
+				# mypost = post_key.get()
+				mypost.pst=upload.key()
+				mypost.cap=self.request.get('P_Caption')
+				mypost.time=datetime.now()
+				mypost.postby=ndb.Key('MyUser',myuser.key.id())
+				mypost.put()
+				myuser.post.append(ndb.Key('PostDb',mypost.key.id()))
+				myuser.put()
+				self.redirect('/')
+			elif self.request.get('Button') == "Cancel":
+				self.redirect('/')

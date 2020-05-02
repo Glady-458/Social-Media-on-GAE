@@ -1,60 +1,65 @@
 <html>
-	<head>
-		<meta charset="utf-8"/>
-		<title>User login/logout</title>
-	</head>
-	<style>
-	.collapsible {
-  border: none;
-  text-align: center;
-  outline: none;
-  font-size: 15px;
+<head>
+	<meta charset="utf-8"/>
+	<title>User login/logout</title>
+</head>
+<style>
+.collapsible {
+	border: none;
+	text-align: center;
+	outline: none;
+	font-size: 15px;
 }
 
 
 /* Style the collapsible content. Note: hidden by default */
 .content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
+	padding: 0 18px;
+	display: none;
+	overflow: hidden;
 }
-	</style>
+</style>
 
-	<body>
-		<center>
-			<h1>Hackable InstaGrame</h1>
+<body>
+	<center>
+		<h1>Hackable InstaGrame</h1>
 		{% if user %}
 		{{ welcome }} {{ myuser.name }} welcome to the application<br/>
-		<p align="right"><a href='/adpost'><input type="button" Name="adp" value="add post"></a></p>
+		{% else %}
+		<p>Hello guest welcome to the application</p>
+		{% endif %}
+		<a href='{{ url }}'><input type="button" Name="login" value="{{ url_string }} "></a>
+		{% if user %}
 		<a href='/follow'><a href='/search'><input type="button" Name="search" value="search"></a>
-		<br/>
+		<a href='/adpost'><input type="button" Name="adp" value="add post"></a>
+		<a href='/myac'><input type="button" Name="adp" value="User Profile"></a>
+		<br/><br/>
 		{%set c=0%}
 		{%for p in pic if c < 50 %}
 		<div>
-			<a href="/post?id={{p.key.id()}}"><img src={{rcpic[loop.index-1]}} style="height:300px;width: 300px"></a><br/>
+			<img src={{rcpic[loop.index-1]}} style="height:300px;width: 300px"><br/>
 			{{p.cap}}<br/>
+			<a href="/post?id={{p.key.id()}}"><button>Add comment</button></a><br/>
 			{%if p.comment%}Comments: <br/>{%endif%}
 			{%set c=1%}
 			{%for ck in p.comment|reverse if c<=5 %}
-			{{ck.get().user.get().name}}-->{{ck.get().comment}}--->{{ck.get().time}}<br/>
+			{{ck.get().user.get().name}}&nbsp&nbsp&nbsp&nbsp&nbsp{{ck.get().comment}}<br/>
 			{%set c=c+1%}
 			{%endfor%}<br/>
 			{%if p.comment|length>5%}
 			<button type="button" class = "collapsible">show more</button>
-			<div class="content"><p>_______________________________________________________<br/>
-			{%for n in range(5,p.comment|length)|reverse%}
-			{{p.comment[n-5].get().user.get().name}}-->{{p.comment[n-5].get().comment}}--->{{p.comment[n-5].get().time}}<br/>
-			{%endfor%}</p>
-		</div>
-		{%endif%}
-		<br/><br/>
+			<div class="content"><p>
+				{%for n in range(5,p.comment|length)|reverse%}
+				{{p.comment[n-5].get().user.get().name}}&nbsp&nbsp&nbsp&nbsp&nbsp{{p.comment[n-5].get().comment}}<br/>
+				{%endfor%}</p>
+			</div>
+			{%endif%}
+			<br/><br/>
 		</div>
 		{%set c=c+1%}
 		{%endfor%}
-		{% else %}
-		<p>Hello guest welcome to the application</p>
 		{% endif %}
-		<p align="right"><a href='{{ url }}'><input type="button" Name="login" value="{{ url_string }} "></a></p>
+
 	</center>
 	<script>
 	var coll = document.getElementsByClassName("collapsible");
@@ -72,5 +77,5 @@
 		});
 	}
 	</script>
-	</body>
+</body>
 </html>

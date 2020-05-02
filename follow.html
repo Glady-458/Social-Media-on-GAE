@@ -5,15 +5,16 @@
     <title></title>
   </head>
   <body>
+    <a href="/"><button>Home</button></a><br/><br/>
     {{list}}<br/>
     {%for u in usr%}
     <p style="font-family: sans-serif; font-size: 15px; padding:5px">
     {%if myuser.name != u.get().name%}
-    <a href="/User?id={{u.get().key.id()}}">{{u.get().name}}</a><br/>
+    <a href="/User?id={{u.get().key.id()}}">{{u.get().name}}</a>&nbsp&nbsp&nbsp&nbsp&nbsp
     {%else%}
-    {{u.get().name}}<br/>
+    {{u.get().name}}&nbsp&nbsp&nbsp&nbsp&nbsp
     {%endif%}
-    Following  {{u.get().follows|length}}<br/>
+    Following  {{u.get().follows|length}}&nbsp&nbsp&nbsp&nbsp&nbsp
     Follower   {{u.get().followers|length}}
   </p>
     <br/>

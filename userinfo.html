@@ -5,18 +5,18 @@
     <title></title>
   </head>
   <body>
-    {{usr}}<br/>
-    <h1><img src = "{{mimg}}" height="100" width="100">
-    {{usr.name}}</h1>
-    <a href="/following?id={{usr.key.id()}}">following</a>   {{len1}}
-    <a href="/follower?id={{usr.key.id()}}">follower</a> {{len2}}
+    <center><br/>
+    <img src = "{{mimg}}" height="100" width="100"><br/>
+    <a href="/"><button>Home</button></a><br/><br/>
+    <h1>{{usr.name}}</h1>
     <form action="/User?id={{id}}" method="post">
       <input type="text" name="id2" value="{{usr.key.id()}}" hidden>
       <input type="submit"  name="fb" value="{{fb}}">
-      <!-- CNN
-      RNN -->
-    </form>
-    <center>
+    </form><br/>
+    <a href="/following?id={{usr.key.id()}}">following</a>   {{len1}}
+    <a href="/follower?id={{usr.key.id()}}">follower</a> {{len2}}
+    <br/>
+    <br/>
     {%for p in post%}
     <div>
     <a href="/"><img src={{p}} style="height:300px;width: 300px"></a><br/>

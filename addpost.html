@@ -9,8 +9,9 @@
     <fieldset>
       <form action="{{upload_url}}" method="post" enctype="multipart/form-data">
         <input type="file" name="file" accept="image/*" value=""><br/>
-        <input type="text" maxlength="200" name="P_Caption" value="{{mypost.cap}}"><br/>
+        Caption: <input type="text" maxlength="200" name="P_Caption" value="{{mypost.cap}}"><br/>
         <input type="Submit" name="Button" value="Add">
+        <input type="submit" name = "Button" value="Cancel"/>
       </form>
     </fieldset>
   </body>

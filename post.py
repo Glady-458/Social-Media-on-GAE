@@ -55,20 +55,6 @@ class Post(webapp2.RequestHandler):
 				comment.put()
 				post.comment.append(ndb.Key('Comment',comment.key.id()))
 				post.put()
-
-
-				# user = ndb.KeyProperty(MyUser)
-				# pst = ndb.KeyProperty(PostDb)
-				# comment = ndb.StringProperty()
-				# time = ndb.DateTimeProperty()
-				# myuser.follows.append(ndb.Key('MyUser',usr.key.id()))
-				# usr.followers.append(ndb.Key('MyUser',myuser.key.id()))
-				# myuser.put()
-				# usr.put()
 				self.redirect('/')
-			elif self.request.get("fb") == "Unfollow":
-				myuser.follows.remove(ndb.Key('MyUser',usr.key.id()))
-				usr.followers.remove(ndb.Key('MyUser',myuser.key.id()))
-				myuser.put()
-				usr.put()
+			elif self.request.get("button") == "Cancel":
 				self.redirect('/')
