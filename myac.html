@@ -9,7 +9,8 @@
     <center>
     <img src = "{{mimg}}" height="100" width="100">
     <h1>{{myuser.name}}</h1>
-    <a href='/'><input type="button" value="Home"></a><br/>
+    <a href='/'><input type="button" value="Home"></a>
+    <a href='/edit'><input type="button" value="Edit profile"></a><br/>
     <a href="/following?id={{myuser.key.id()}}">following</a>   {{len1}}
     <a href="/follower?id={{myuser.key.id()}}">follower</a> {{len2}}
     <br/><br/>

@@ -12,12 +12,13 @@
 				   <br/>
 				   Age:<input type="number" name="users_age" value="{{ myuser.age }}"/>
 				   <br/>
-					 upload profile photo <input type="file" accept="image/*" name="file"/>
+					 upload profile photo:  <input type="file" accept="image/*" name="file"/><br/><br/>
 				   <input type="submit" value="Update" name="button"/>
 				   <input type="submit" value="Cancel" name="button"/><br/>
-				 <br/>
-				 {{img}}<br/>
+				 <br/><br/>
+				 {%if myuser.DP%}
 				 <img src={{url}} style="height:300px;width: 300px"/>
+				 {%endif%}
 		 	</form>
     </fieldset>
 	</body>

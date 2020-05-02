@@ -34,14 +34,6 @@ class AdPost(blobstore_handlers.BlobstoreUploadHandler):
 			}
 			template = JINJA_ENVIRONMENT.get_template('addpost.html')
 			self.response.write(template.render(template_values))
-		# else:
-		#
-		# 	template = JINJA_ENVIRONMENT.get_template("error.html")
-		# 	template_values = {
-		# 		"error" : "Please login first!",
-		# 		"url" : "/",
-		# 	}
-		# self.response.write(template.render(template_values))
 
     def post(self):
 		self.response.headers['Content-Type'] = 'text/html'
@@ -52,10 +44,7 @@ class AdPost(blobstore_handlers.BlobstoreUploadHandler):
 		if user:
 			if self.request.get('Button') == "Add":
 				upload = self.get_uploads('file')[0]
-				# upload_url = blobstore.create_upload_url('/AdPost')
 				mypost = PostDb()
-				# upload_url = blobstore.create_upload_url('file')
-				# mypost = post_key.get()
 				mypost.pst=upload.key()
 				mypost.cap=self.request.get('P_Caption')
 				mypost.time=datetime.now()

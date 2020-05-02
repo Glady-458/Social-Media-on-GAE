@@ -15,14 +15,14 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
 	extensions=['jinja2.ext.autoescape'],
 	autoescape=True)
-class Edit(webapp2.RequestHandler):
+class Edit(blobstore_handlers.BlobstoreUploadHandler):
 	def get(self):
 		self.response.headers['Content-Type'] = 'text/html'
 		user = users.get_current_user()
 		if user:
 			myuser_key = ndb.Key('MyUser', user.user_id())
 			myuser = myuser_key.get()
-			upload_url = blobstore.create_upload_url('/upload_photo')
+			upload_url = blobstore.create_upload_url('/edit')
 			pic_key=myuser.DP
 			key = BlobKey(str(myuser.DP))
 			url= get_serving_url(key)
@@ -43,7 +43,6 @@ class Edit(webapp2.RequestHandler):
 
 		self.response.write(template.render(template_values))
 
-class PhotoUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 	def post(self):
 		self.response.headers['Content-Type'] = 'text/html'
 		if self.request.get('button') == 'Update':
@@ -63,10 +62,3 @@ class PhotoUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 
 		elif self.request.get('button') == 'Cancel':
 			self.redirect('/')
-class show(blobstore_handlers.BlobstoreDownloadHandler):
-	def get(self, pic_key):
-		if not blobstore.get(pic_key):
-			self.error(404)
-		else:
-			return send_blob(pic_key)
-			#self.send_blob(pic_key)

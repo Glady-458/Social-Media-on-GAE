@@ -73,8 +73,8 @@ class MainPage(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
 ('/', MainPage),
 ('/edit', Edit),
-('/upload_photo', PhotoUploadHandler),
-('/show/([^/]+)?',show),
+# ('/upload_photo', PhotoUploadHandler),
+# ('/show/([^/]+)?',show),
 ('/search', Search),
 ('/adpost',AdPost),
 ('/User',User),
