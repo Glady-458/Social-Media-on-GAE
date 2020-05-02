@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <br/>
+    <h1><img src = "{{mimg}}" height="100" width="100">
+    {{myuser.name}}</h1>
+    <a href="/following?id={{myuser.key.id()}}">following</a>   {{len1}}
+    <a href="/follower?id={{myuser.key.id()}}">follower</a> {{len2}}
+    <form action="/User?id={{id}}" method="post">
+      <input type="text" name="id2" value="{{myuser.key.id()}}" hidden>
+      <!-- CNN
+      RNN -->
+    </form>
+    <center>
+    {%for p in post%}
+    <div>
+    <a href="/"><img src={{p}} style="height:300px;width: 300px"></a><br/>
+    {{cap[loop.index-1]}}
+  </div>
+    {%endfor%}<br/>
+  </center>
+  </body>
+</html>

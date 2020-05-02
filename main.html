@@ -3,6 +3,23 @@
 		<meta charset="utf-8"/>
 		<title>User login/logout</title>
 	</head>
+	<style>
+	.collapsible {
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+}
+
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
+	</style>
+
 	<body>
 		<center>
 			<h1>Hackable InstaGrame</h1>
@@ -10,15 +27,6 @@
 		{{ welcome }} {{ myuser.name }} welcome to the application<br/>
 		<p align="right"><a href='/adpost'><input type="button" Name="adp" value="add post"></a></p>
 		<a href='/follow'><a href='/search'><input type="button" Name="search" value="search"></a>
-		<!-- <br>{{allpost}}<br> -->
-		<!-- <br>{{myuser.post}}<br>
-		{%for p in allpost%}
-		<div>
-			{{p.cap}}  {{p.postby.get().name}}  {{p.time}}   {{p.key.id()}}
-		<br/>
-	</div>
-		{%endfor%}<br/>
-		<br/> -->
 		<br/>
 		{%set c=0%}
 		{%for p in pic if c < 50 %}
@@ -26,10 +34,20 @@
 			<a href="/post?id={{p.key.id()}}"><img src={{rcpic[loop.index-1]}} style="height:300px;width: 300px"></a><br/>
 			{{p.cap}}<br/>
 			{%if p.comment%}Comments: <br/>{%endif%}
-			{%for ck in p.comment%}
-			{{ck.get().user.get().name}}-->{{ck.get().comment}}<br/>
-			{%endfor%}
-		<br/>
+			{%set c=1%}
+			{%for ck in p.comment|reverse if c<=5 %}
+			{{ck.get().user.get().name}}-->{{ck.get().comment}}--->{{ck.get().time}}<br/>
+			{%set c=c+1%}
+			{%endfor%}<br/>
+			{%if p.comment|length>5%}
+			<button type="button" class = "collapsible">show more</button>
+			<div class="content"><p>_______________________________________________________<br/>
+			{%for n in range(5,p.comment|length)|reverse%}
+			{{p.comment[n-5].get().user.get().name}}-->{{p.comment[n-5].get().comment}}--->{{p.comment[n-5].get().time}}<br/>
+			{%endfor%}</p>
+		</div>
+		{%endif%}
+		<br/><br/>
 		</div>
 		{%set c=c+1%}
 		{%endfor%}
@@ -38,5 +56,21 @@
 		{% endif %}
 		<p align="right"><a href='{{ url }}'><input type="button" Name="login" value="{{ url_string }} "></a></p>
 	</center>
+	<script>
+	var coll = document.getElementsByClassName("collapsible");
+	var i;
+
+	for (i = 0; i < coll.length; i++) {
+		coll[i].addEventListener("click", function() {
+			this.classList.toggle("active");
+			var content = this.nextElementSibling;
+			if (content.style.display === "block") {
+				content.style.display = "none";
+			} else {
+				content.style.display = "block";
+			}
+		});
+	}
+	</script>
 	</body>
 </html>

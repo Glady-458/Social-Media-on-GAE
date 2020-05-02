@@ -11,6 +11,7 @@ from addpost import *
 from userinfo import *
 from follow import *
 from post import *
+from myacc import *
 from datetime import datetime
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -79,5 +80,6 @@ app = webapp2.WSGIApplication([
 ('/User',User),
 ('/follower', Follower),
 ('/following', Following),
-('/post', Post)
+('/post', Post),
+('/myac', MyAc)
 ], debug=True)
