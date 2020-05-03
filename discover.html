@@ -15,7 +15,7 @@
           {%for name in list%}
           {%if name.name != myuser.name%}
             <tr>
-              <td><a href="/User?id={{name.key.id()}}">{{name.name}}</a></td>
+              <td><a href="/User?id={{name.key.id()}}">{{name.name}}</a></td><td>&nbsp&nbsp&nbsp&nbsp</td><td>Followers {{name.followers|length}}</td>
             </tr>
           {%endif%}
           {%endfor%}

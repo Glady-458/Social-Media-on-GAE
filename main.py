@@ -24,6 +24,7 @@ class MainPage(webapp2.RequestHandler):
 		url = ''
 		url_string = ''
 		welcome = 'Welcome back'
+		msg = ''
 		myuser = None
 		user = users.get_current_user()
 		pic = []
@@ -41,6 +42,9 @@ class MainPage(webapp2.RequestHandler):
 				myuser.put()
 			if myuser.name == None:
 				self.redirect('/edit')
+			if myuser.post == [] and myuser.follows == []:
+				msg='No post yet'
+
 		if myuser:
 			for post in allpost:
 				if myuser.follows:
@@ -65,7 +69,8 @@ class MainPage(webapp2.RequestHandler):
 			'myuser' : myuser,
 			'allpost' : allpost,
 			'pic' : pic,
-			'rcpic' : rcpic
+			'rcpic' : rcpic,
+			'msg': msg
 		}
 		template = JINJA_ENVIRONMENT.get_template('main.html')
 		self.response.write(template.render(template_values))
@@ -73,8 +78,6 @@ class MainPage(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
 ('/', MainPage),
 ('/edit', Edit),
-# ('/upload_photo', PhotoUploadHandler),
-# ('/show/([^/]+)?',show),
 ('/search', Search),
 ('/adpost',AdPost),
 ('/User',User),
